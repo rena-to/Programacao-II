@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>FP Sellection</title>
+</head>
+
+<body>
+
+    <header>
+        <img src="img/logo.png" alt="FP Sellection logo" class="logo">
+        <nav>
+            <ul>
+                <li>Home</li>
+                <li>Carros</li>
+                <li>Fale Conosco</li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <div class="container">
+
+            <div class="list">
+                <!-- item 1 -->
+                <div class="item active">
+                    <div class="car-img">
+                        <img src="img/1.png" alt="Porsche 911">
+                    </div>
+
+                    <div class="content">
+                        <p class="car-information">Único dono</p>
+                        <h2>911 Carrera</h2>
+                        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit,
+                            reprehenderit
+                            consequatur minus incidunt iusto quod quasi ut voluptate nobis facere labore repudiandae,
+                            eligendi, deleniti delectus rerum? Velit quae voluptates pariatur.</p>
+                        <button class="information">Saiba mais</button>
+                    </div>
+                </div>
+                <!-- fecha item 1 -->
+
+                <!-- item 2 -->
+                <div class="item">
+                    <div class="car-img">
+                        <img src="img/2.png" alt="Porsche 911">
+                    </div>
+
+                    <div class="content">
+                        <p class="car-information">Semi-novo</p>
+                        <h2>Ferrai</h2>
+                        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit,
+                            reprehenderit
+                            consequatur minus incidunt iusto quod quasi ut voluptate nobis facere labore repudiandae,
+                            eligendi, deleniti delectus rerum? Velit quae voluptates pariatur.</p>
+                        <button class="information">Saiba mais</button>
+                    </div>
+                </div>
+                <!-- fecha item 2 -->
+
+                <!-- item 3 -->
+                <div class="item">
+                    <div class="car-img">
+                        <img src="img/3.png" alt="Porsche 911">
+                    </div>
+
+                    <div class="content">
+                        <p class="car-information">2015</p>
+                        <h2>Lamborghini</h2>
+                        <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit,
+                            reprehenderit
+                            consequatur minus incidunt iusto quod quasi ut voluptate nobis facere labore repudiandae,
+                            eligendi, deleniti delectus rerum? Velit quae voluptates pariatur.</p>
+                        <button class="information">Saiba mais</button>
+                    </div>
+                </div>
+                <!--fecha item 3 -->
+            </div>
+
+            <div class="arrows">
+                <button id="prev"><img src="img/arrow.png" alt=""></button>
+                <button id="next"><img src="img/arrow.png" alt=""></button>
+            </div>
+
+            <div class="indicators">
+                <div class="number"></div> <!-- Mostra o número da imagem ativa -->
+                <ul>
+                    <li class="active">01</li>
+                    <li>02</li>
+                    <li>03</li>
+                </ul>
+            </div>
+            
+        </div>
+
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
