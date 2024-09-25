@@ -1,0 +1,161 @@
+import sqlite3
+
+# Função para conectar ao banco de dados (ou criar, se não existir)
+def conectar():
+    return sqlite3.connect('usuarios.db')
+
+# Função para criar a tabela de usuários, se não existir
+def criar_tabela():
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS usuarios (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            nome TEXT NOT NULL,
+            idade INTEGER NOT NULL,
+            email TEXT NOT NULL,
+            endereco TEXT NOT NULL,
+            cep INTEGER NOT NULL,
+            nacionalidade TEXT NOT NULL,
+            naturalidade TEXT NOT NULL       
+        )
+    ''')
+    conn.commit()
+    conn.close()
+
+# Função para adicionar um novo usuário
+def adicionar_usuario(nome, idade, email, endereco, cep, nacionalidade, naturalidade):
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute('''
+        INSERT INTO usuarios (nome, idade, email, endereco, cep, nacionalidade, naturalidade) 
+        VALUES (?,?,?,?,?,?,?)
+    ''', (nome, idade, email, endereco, cep, nacionalidade, naturalidade))
+    conn.commit()
+    conn.close()
+    print("Usuário adicionado com sucesso!")
+
+def verificar_usuario():
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM usuarios')
+    usuarios = cursor.fetchall()
+    conn.close()
+    return usuarios
+
+# Função para listar todos os usuários
+def listar_usuarios(usuarios):
+        print("\nLista de usuários:")
+        for usuario in usuarios:
+            print(f"ID: {usuario[0]}, Nome: {usuario[1]}, Idade: {usuario[2]}, Email: {usuario[3]}, Endereco: {usuario[4]}, CEP: {usuario[5]}, Nacionalidade: {usuario[6]}, Naturalidade: {usuario[7]}")
+
+# Função para atualizar um usuário
+def atualizar_usuario(id, novo_nome, nova_idade, novo_email, novo_endereco, novo_cep, novo_nacionalidade, novo_naturalidade):
+    
+    conn = conectar()
+    cursor = conn.cursor()
+    cursor.execute('''
+        UPDATE usuarios 
+        SET nome = ?, idade = ?, email = ?, endereco = ?, cep = ?, nacionalidade = ?, naturalidade = ?
+        WHERE id = ?
+    ''', (novo_nome, nova_idade, novo_email, novo_endereco, novo_cep, novo_nacionalidade, novo_naturalidade, id))
+    conn.commit()
+    conn.close()
+    print("Usuário atualizado com sucesso!")
+
+# Função para excluir um usuário
+def excluir_usuario(id):
+    usuarios = verificar_usuario()
+
+    for usuario in usuarios:
+        if int(id) == usuario[0]:
+            conn = conectar()
+            cursor = conn.cursor()
+            cursor.execute('DELETE FROM usuarios WHERE id = ?', (id,))
+            conn.commit()
+            conn.close()
+            print("Usuário excluído com sucesso!")
+            return
+        
+    print("id nao encontrado")
+
+# Função para exibir o menu
+def menu():
+    criar_tabela()  # Garante que a tabela está criada
+
+    while True:
+        print("\nMenu:")
+        print("1. Adicionar usuário")
+        print("2. Listar usuários")
+        print("3. Atualizar usuário")
+        print("4. Excluir usuário")
+        print("5. Sair")
+        opcao = input("Escolha uma opção: ")
+
+        # adicionar usuario
+        if opcao == '1':
+            nome = input("Nome: ")
+            idade = int(input("Idade: "))
+            email = input("Email: ")   
+            endereco = input("Endereço: ")
+            cep = input("CEP: ")
+            nacionalidade = input("Nacionalidade: ")
+            naturalidade = input("Naturalidade: ")
+            adicionar_usuario(nome, idade, email, endereco, cep, nacionalidade, naturalidade)
+        
+        # Listar usuarios
+        elif opcao == '2':
+            usuarios = verificar_usuario()
+
+            if usuarios:
+                listar_usuarios(usuarios)
+            else:
+                print("nenhum usuario cadastrado")
+
+        # atualizar
+        elif opcao == '3':
+
+            usuarios = verificar_usuario()
+
+            if usuarios:
+                id = int(input("ID do usuário a ser atualizado: "))
+
+                usuarios = verificar_usuario()
+
+                for usuario in usuarios:
+                    if int(id) == usuario[0]:
+                        novo_nome = input("Novo nome: ")
+                        nova_idade = int(input("Nova idade: "))
+                        novo_email = input("Novo email: ")      
+                        novo_cep = input("Novo CEP: ")
+                        novo_endereco = input("Novo Endereço: ")
+                        novo_nacionalidade = input("Nova Nacionalidade: ")
+                        novo_naturalidade = input("Nova Naturalidade: ")      
+                        atualizar_usuario(id, novo_nome, nova_idade, novo_email, novo_endereco, novo_cep, novo_nacionalidade, novo_naturalidade)
+                    continue
+                print("id nao encontrado")
+            
+            else:
+                print("nenhum usuario cadastrado")
+        
+        # deletar
+        elif opcao == '4':
+            usuarios = verificar_usuario()
+
+            if usuarios:
+                id = (input("ID do usuário a ser excluído: "))
+                excluir_usuario(id)
+            else:
+                print("nenhum usuario cadastrado")
+        
+        # sair
+        elif opcao == '5':
+            print("Saindo...")
+            break
+        else:
+            print("Opção inválida, tente novamente.")
+
+# Executar o menu
+if __name__ == "__main__":
+    menu()
+
